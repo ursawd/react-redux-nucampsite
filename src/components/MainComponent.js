@@ -3,6 +3,7 @@ import Directory from "./DirectoryComponent";
 import { CAMPSITES } from "../shared/campsites";
 import CampsiteInfo from "./CampsiteInfoComponent";
 import Header from "./HeaderComponenet";
+import Footer from "./FooterComponent";
 
 class Main extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class Main extends Component {
         <CampsiteInfo
           campsite={this.state.campsites.filter(campsite => campsite.id === this.state.selectedCampsite)[0]}
         />
+        <Footer />
       </div>
     );
   }
