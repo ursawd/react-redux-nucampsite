@@ -62,7 +62,8 @@ class Contact extends Component {
     return errors;
   }
   //! question this usage. docs imply this is complicated and can
-  //! handle with 2 params, field and event w/o 2nd arrow function.
+  //! handle with 2 params, field and event w/o 2nd arrow function,
+  //! i.e. '''<button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>'''
   //! also can touched be set w/o spread op with object merge behavior?
   handleBlur = field => () => {
     this.setState({
@@ -146,7 +147,10 @@ class Contact extends Component {
                     onChange={this.handleInputChange}
                     onBlur={this.handleBlur("firstName")}
                     //! what does/ where is invalid do/used
-                    invalid={errors.firstName}
+                    //TODO replaced {errors.firstName} truthy check w/
+                    //TODO ternary statement becasue truthy statement was giving error
+                    //TODO invalid was being passed a string and not a boolean
+                    invalid={errors.firstName ? true : false}
                   />
                   <FormFeedback>{errors.firstName}</FormFeedback>
                 </Col>
@@ -164,7 +168,7 @@ class Contact extends Component {
                     value={this.state.lastName}
                     onChange={this.handleInputChange}
                     onBlur={this.handleBlur("lastName")}
-                    invalid={errors.lastName}
+                    invalid={errors.lastName ? true : false}
                   />
                   <FormFeedback>{errors.lastName}</FormFeedback>
                 </Col>
@@ -182,7 +186,7 @@ class Contact extends Component {
                     value={this.state.phoneNum}
                     onChange={this.handleInputChange}
                     onBlur={this.handleBlur("phoneNum")}
-                    invalid={errors.phoneNum}
+                    invalid={errors.phoneNum ? true : false}
                   />
                   <FormFeedback>{errors.phoneNum}</FormFeedback>
                 </Col>
@@ -200,7 +204,7 @@ class Contact extends Component {
                     value={this.state.email}
                     onChange={this.handleInputChange}
                     onBlur={this.handleBlur("email")}
-                    invalid={errors.email}
+                    invalid={errors.email ? true : false}
                   />
                   <FormFeedback>{errors.email}</FormFeedback>
                 </Col>
