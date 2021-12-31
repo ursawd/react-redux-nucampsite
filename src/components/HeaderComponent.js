@@ -11,6 +11,10 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
+  Form,
+  FormGroup,
+  Input,
+  Label,
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
 
@@ -24,6 +28,7 @@ export default class HeaderComponent extends Component {
     };
     this.toggleNav = this.toggleNav.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
   toggleNav() {
@@ -36,6 +41,12 @@ export default class HeaderComponent extends Component {
     this.setState({
       isModalOpen: !this.state.isModalOpen,
     });
+  }
+
+  handleLogin(event) {
+    alert(`Username: ${this.username.value} Password: ${this.password.value} Remember: ${this.remember.checked}`);
+    this.toggleModal();
+    event.preventDefault();
   }
 
   render() {
@@ -95,7 +106,27 @@ export default class HeaderComponent extends Component {
         </Navbar>
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
-          <ModalBody></ModalBody>
+          <ModalBody>
+            <Form onSubmit={this.handleLogin}>
+              <FormGroup>
+                <Label htmlFor="username">Username</Label>
+                <Input type="text" id="username" name="username" innerRef={input => (this.username = input)} />
+              </FormGroup>
+              <FormGroup>
+                <Label htmlFor="password">Password</Label>
+                <Input type="password" id="password" name="password" innerRef={input => (this.password = input)} />
+              </FormGroup>
+              <FormGroup check>
+                <Label check>
+                  <Input type="checkbox" name="remember" innerRef={input => (this.remember = input)} />
+                  Remember me
+                </Label>
+              </FormGroup>
+              <Button type="submit" value="submit" color="primary">
+                Login
+              </Button>
+            </Form>
+          </ModalBody>
         </Modal>
       </React.Fragment>
     );
