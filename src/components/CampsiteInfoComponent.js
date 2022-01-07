@@ -139,7 +139,12 @@ function RenderComments({ comments, postComment, campsiteId }) {
     return (
       <div className="col-md-5 m-1">
         <h4>Comments</h4>
-        <Stagger in>
+        <FadeTransform
+          in
+          transformProps={{
+            exitTransform: "scale(0.5) translateX(-200%)",
+          }}
+        >
           {comments.map(comment => {
             return (
               <Fade in key={comment.id}>
@@ -156,7 +161,7 @@ function RenderComments({ comments, postComment, campsiteId }) {
               </Fade>
             );
           })}
-        </Stagger>
+        </FadeTransform>
         <CommentForm campsiteId={campsiteId} postComment={postComment} />
       </div>
     );
